@@ -63,6 +63,18 @@ ui.py
     }
   ]
   ```
+  
+`data/workers.json` - plik zawierający dany o pracownikach
+
+  przykład:
+  ```
+  [
+    {
+      "id": 1,
+      "name": "John Doe"
+    }
+  ]
+  ```
 
 `data_handlers.py` - zawiera funkcje pomocnicze dla pracy z danymi
 * `read_data` - czyta i prasuje dane z pliku JSON
