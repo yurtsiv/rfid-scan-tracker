@@ -4,22 +4,24 @@
 * Uruchomić plik `main.py`
 
 ### Struktura aplikacji
-
-`data/`
----- `cards.json`
----- `registrations.json`
----- `terminals.json`
----- `workers.json`  
-`data_handlers.py`
-`list_utils.py`
-`main.py`
-`reports.py`
-`ui.py`
+```
+data/
+--cards.json
+--registrations.json
+--terminals.json
+--workers.json  
+data_handlers.py
+list_utils.py
+main.py
+reports.py
+ui.py
+```
 
 
 `data/` - folder w którym znajdują się pliki `.json` z danymi
 
 `data/cards.json` - plik zawierający dane o kartach
+
   przykład:
   ```
   [
@@ -29,6 +31,7 @@
   ```
 
 `data/registrations.json` - plik zawierający dane o skanowaniu kart
+
   pzykład:
   ```
   [
@@ -50,12 +53,31 @@
 
 
 `data/terminals.json` - plik zawierający dany o terminalach (klientach)
+
   przykład:
   ```
   [
     {
       "id": 16576223788569598977048293633576304106,
       "name": "Entrance 1"
+    }
+  ]
+  ```
+  
+`data/workers.json` - plik zawierający dany o pracownikach
+
+  przykład:
+  ```
+  [
+    {
+      "id": 1,
+      "fullName": "John Doe",
+      "cardId": [148, 35, 65, 119]
+    },
+    
+    {
+      "id": 2,
+      "fullName": "Michael Smith"
     }
   ]
   ```
@@ -85,6 +107,7 @@
 
 * `find_by` - zwraca jeden element z listy po zadanym predukacie
 * `group_into_pairs` - grupuje sąsiednie elementy listy w pary'
+
   prykład:
   `group_into_pairs([1,2,3,4,5]) == [(1,2), (3,4), (5)]` 
 * `diff` - zwraca różnice miedzy listami
