@@ -120,7 +120,8 @@ menu_items = [
   ("Assign card to employee", assign_card_menu),
   ("Unassign card from employee", unassign_card_menu),
   ("Register", register_menu),
-  ("Generate report", report_menu)
+  ("Generate report", report_menu),
+  ("Exit", sys.exit)
 ]
 
 def start_menu():

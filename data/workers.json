@@ -1,13 +1,7 @@
 [
   {
     "id": 1,
-    "fullName": "Worker 1",
-    "cardId": [
-      148,
-      35,
-      65,
-      119
-    ]
+    "fullName": "Worker 1"
   },
   {
     "id": 2,
