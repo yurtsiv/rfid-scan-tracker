@@ -6,14 +6,23 @@
 ### Struktura aplikacji
 
 `data/`
+
 ---- `cards.json`
+
 ---- `registrations.json`
+
 ---- `terminals.json`
+
 ---- `workers.json`  
+
 `data_handlers.py`
+
 `list_utils.py`
+
 `main.py`
+
 `reports.py`
+
 `ui.py`
 
 
