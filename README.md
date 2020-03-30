@@ -21,6 +21,7 @@ ui.py
 `data/` - folder w którym znajdują się pliki `.json` z danymi
 
 `data/cards.json` - plik zawierający dane o kartach
+
   przykład:
   ```
   [
@@ -30,6 +31,7 @@ ui.py
   ```
 
 `data/registrations.json` - plik zawierający dane o skanowaniu kart
+
   pzykład:
   ```
   [
@@ -51,6 +53,7 @@ ui.py
 
 
 `data/terminals.json` - plik zawierający dany o terminalach (klientach)
+
   przykład:
   ```
   [
@@ -86,6 +89,7 @@ ui.py
 
 * `find_by` - zwraca jeden element z listy po zadanym predukacie
 * `group_into_pairs` - grupuje sąsiednie elementy listy w pary'
+
   prykład:
   `group_into_pairs([1,2,3,4,5]) == [(1,2), (3,4), (5)]` 
 * `diff` - zwraca różnice miedzy listami
