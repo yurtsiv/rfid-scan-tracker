@@ -1,4 +1,4 @@
-import os
+import sys
 import json
 import paho.mqtt.client as mqtt
 from data_handlers import add_scan
@@ -18,21 +18,22 @@ def on_connect(client, userdata, flags, rc):
 def on_disconnect():
   print("Disconnected from the broker")
 
-def on_message(client, userdata, msg):
-  print(f"\nNew message\nTopic: {msg.topic}\nPayload: {msg.payload}\n")
-  topic = msg.topic
-  payload = None
-
-  try:
-    payload = json.loads(msg.payload)
-  except json.JSONDecodeError:
-    print("ERROR: Invalid JSON\n")
-    return None
-
+def handle_message(topic, payload):
   if topic == topics['scan_card']:
     add_scan(payload.get('terminal_id'), payload.get('value'))
   else:
     print(f"Unknown topic {topic}")
+
+def on_message(client, userdata, msg):
+  print(f"\nMessage received\nTopic: {msg.topic}\nPayload: {msg.payload}\n")
+
+  try:
+    payload = json.loads(msg.payload)
+    handle_message(msg.topic, payload)
+  except json.JSONDecodeError:
+    print("ERROR: Invalid JSON\n")
+  except Exception as err:
+    print(f"ERROR: {str(err)}")
 
 client = mqtt.Client()
 client.on_connect = on_connect
