@@ -7,10 +7,10 @@ settings_path = os.path.join(dirname, '../settings.json')
 
 def get_settings():
   global_settings = json.loads(open(settings_path).read())
-  _, client_id = sys.argv
+  _, terminal_id = sys.argv
 
   return {
-    'client_id': 123,
+    'terminal_id': terminal_id,
     'global_settings': global_settings
   }
 

@@ -144,7 +144,7 @@ def add_scan(terminal_id, card_id):
   person = find_person("card_id", card_id)
   terminal = find_terminal("id", terminal_id)
  
-  if (not card_id in cards) or (person is None ) or (terminal is None):
+  if (not card_id in cards) or (person is None) or (terminal is None):
     print("Card ID or terminal isn't known to the system")
     scans.append({ 'card_id': card_id, 'terminal_id': terminal_id, 'time': time })
   else:
