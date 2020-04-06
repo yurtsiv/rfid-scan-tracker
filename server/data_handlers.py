@@ -8,7 +8,7 @@ dirname = os.path.dirname(__file__)
 
 workers_file = os.path.join(dirname, "data/workers.json")
 terminals_file = os.path.join(dirname, "data/terminals.json")
-registrations_file = os.path.join(dirname, "data/registrations.json")
+scans_file = os.path.join(dirname, "data/scans.json")
 cards_file = os.path.join(dirname, "data/cards.json")
 
 def read_data(path):
@@ -23,7 +23,7 @@ def write_data(path, array):
 
 workers = read_data(workers_file)
 terminals = read_data(terminals_file)
-registrations = read_data(registrations_file)
+scans = read_data(scans_file)
 cards = read_data(cards_file)
 
 def get_terminals():
@@ -46,10 +46,10 @@ def filter_workers(key):
 
   return [w for w in workers if key(w)]
 
-def filter_registrations(key):
-  global registrations
+def filter_scans(key):
+  global scans
 
-  return [r for r in registrations if key(r)]
+  return [r for r in scans if key(r)]
   
 
 def get_workers_with_card():
@@ -134,10 +134,10 @@ def remove_card_id(workerId):
   del worker['cardId']
   write_data(workers_file, workers)
 
-def add_registration(terminalId, cardId):
+def add_scan(terminalId, cardId):
   global workers
   global terminals
-  global registrations
+  global scans
   global cards
 
   time = datetime.now()
@@ -146,13 +146,13 @@ def add_registration(terminalId, cardId):
  
   if (not cardId in cards) or (worker is None ) or (terminal is None):
     print("Card ID or terminal isn't known to the system")
-    registrations.append({ 'cardId': cardId, 'terminalId': terminalId, 'time': time })
+    scans.append({ 'cardId': cardId, 'terminalId': terminalId, 'time': time })
   else:
-    registrations.append({
+    scans.append({
       'cardId': cardId,
       'terminalId': terminalId,
       'workerId': worker['id'],
       'time': time
     })
   
-  write_data(registrations_file, registrations)
+  write_data(scans_file, scans)

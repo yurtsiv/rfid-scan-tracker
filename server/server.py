@@ -1,7 +1,7 @@
 import os
 import json
 import paho.mqtt.client as mqtt
-from data_handlers import add_registration
+from data_handlers import add_scan
 
 dirname = os.path.dirname(__file__)
 settings_path = os.path.join(dirname, '../settings.json')
@@ -25,7 +25,7 @@ def on_message(client, userdata, msg):
     return None
 
   if topic == topics['scan_card']:
-    add_registration(payload['client_id'], payload['value'])
+    add_scan(payload['client_id'], payload['value'])
   else:
     print(f"Unknown topic {topic}")
 

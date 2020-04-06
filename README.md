@@ -7,7 +7,7 @@
 ```
 data/
 --cards.json
---registrations.json
+--scans.json
 --terminals.json
 --workers.json  
 data_handlers.py
@@ -30,7 +30,7 @@ ui.py
   ]
   ```
 
-`data/registrations.json` - plik zawierający dane o skanowaniu kart
+`data/scans.json` - plik zawierający dane o skanowaniu kart
 
   pzykład:
   ```
@@ -89,7 +89,7 @@ ui.py
 * `get_workers` - zwraca listę wszystkich pracowników
 * `get_cards` - zwraca listę wszystkich kart
 * `filter_workers` - filtruje workerów po zadanym predykacie
-* `filter_registrations` - filtruje workerów po zadanym predykacie
+* `filter_scans` - filtruje workerów po zadanym predykacie
 * `get_workers_with_card` - zwraca listę pracowników którzy mają kartę
 * `get_workers_without_card` - zwraca listę pracowników którzy nie mają karty
 * `get_not_assigned_cards` - zwraca listę kart które nie są przypisane do pracownika
@@ -101,7 +101,7 @@ ui.py
 * `delete_terminal` - usuwa terminal po `id`
 * `assign_card_id` - przypisuje kartę do pracownika
 * `remove_card_id` - usuwa kartę z pracownika 
-* `add_registration` - dodaje rejestrację (sprawdzając czy jest taki terminal i robotnik)
+* `add_scan` - dodaje rejestrację (sprawdzając czy jest taki terminal i robotnik)
 
 `list_utils.py` - zawiera funkcje pomocnicze dla pracy z listami
 

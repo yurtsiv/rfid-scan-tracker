@@ -1,5 +1,5 @@
 import csv
-from data_handlers import filter_registrations, find_worker
+from data_handlers import filter_scans, find_worker
 from list_utils import group_into_pairs
 
 def write_to_csv(worker_name, regs_groups):
@@ -35,14 +35,14 @@ def write_to_csv(worker_name, regs_groups):
       writer.writerow(row)
 
 def generate_report(workerId):
-  global registrations
+  global scans
 
   worker = find_worker('id', workerId)
   if worker is None:
     raise "Worker is not registered in the system"
 
-  registrations = filter_registrations(lambda r: r.get('workerId') == workerId)
-  sorted_regs = sorted(registrations, key=lambda r: r['time'])
+  scans = filter_scans(lambda r: r.get('workerId') == workerId)
+  sorted_regs = sorted(scans, key=lambda r: r['time'])
   regs_groups = group_into_pairs(sorted_regs)
 
   write_to_csv(worker['fullName'], regs_groups)

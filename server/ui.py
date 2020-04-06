@@ -101,7 +101,7 @@ def register_menu():
     return
 
 
-  add_registration(selected_terminal["id"], selected_card)
+  add_scan(selected_terminal["id"], selected_card)
   print("\nEmployee registered")
 
 def report_menu():
