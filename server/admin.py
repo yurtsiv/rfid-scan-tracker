@@ -5,12 +5,12 @@ import sys, traceback
 def input_int(min, max, label):
   while True:
     try:
-      num = int(input("\n" + label))
+      num = int(input(f"\n{label}"))
 
       if num >= min and num <= max:
         return num
 
-      print("Enter a number between " + str(min) + " and " + str(max))
+      print(f"Enter a number between {str(min)} and {str(max)}")
     except Exception:
       print("Invalid input. Try again!")
 
@@ -21,7 +21,7 @@ def pick_from_list(l, label="Select an item: "):
 def print_list(l):
   print("\n")
   for i in range(len(l)):
-    print(str(i + 1) + ".  " + str(l[i]))
+    print(f"{str(i + 1)}. {str(l[i])}")
 
 def print_and_pick_with_cancel(l, label="Select an item: "):
   print_list(l + ['Cancel'])
@@ -76,7 +76,7 @@ def delete_terminal_menu():
   terminals = get_terminals()
   
   if terminals == []:
-    print("No terminals")
+    print("\nNo terminals")
   else:
     selected_terminal = print_and_pick_with_cancel(terminals, "Select terminal: ")
     if selected_terminal is None:
@@ -126,7 +126,7 @@ def report_menu():
     return
   
   generate_report(selected_person['id'])
-  print("Report generated")
+  print("\nReport generated. Look for CSV file in the current direcotry")
 
 menu_items = [
   ("Add person", add_person_menu),
