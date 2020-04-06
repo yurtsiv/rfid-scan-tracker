@@ -1,9 +1,9 @@
 {
-  "mqtt_broker": {
-    "url": "mqtt.eclipse.org"
-  },
-  "top_level_topic": "rfid-time-register",
-  "topics": {
-    "scan_card": "rfid-time-register/scan-card"
-  }
+    "mqtt_broker": {
+        "url": "mqtt.eclipse.org"
+    },
+    "top_level_topic": "rfid-time-register",
+    "topics": {
+        "scan_card": "rfid-time-register/scan-card"
+    }
 }
