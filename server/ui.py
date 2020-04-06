@@ -107,10 +107,9 @@ def start_menu():
   _, selected_func = pick_from_list(menu_items)
   selected_func()
 
-def run_ui():
-  while True:
-    try:
-      start_menu()
-    except Exception:
-      err_type, val, trace = sys.exc_info()
-      traceback.print_exception(err_type, val, trace)
+while True:
+  try:
+    start_menu()
+  except Exception:
+    err_type, val, trace = sys.exc_info()
+    traceback.print_exception(err_type, val, trace)
