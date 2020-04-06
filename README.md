@@ -99,8 +99,8 @@ ui.py
 * `delete_card` - usuwa kartę
 * `add_terminal` - dodaje terminal generując unikalny `id`
 * `delete_terminal` - usuwa terminal po `id`
-* `assign_card_id` - przypisuje kartę do pracownika
-* `remove_card_id` - usuwa kartę z pracownika 
+* `assign_card` - przypisuje kartę do pracownika
+* `unassign_card` - usuwa kartę z pracownika 
 * `add_scan` - dodaje rejestrację (sprawdzając czy jest taki terminal i robotnik)
 
 `list_utils.py` - zawiera funkcje pomocnicze dla pracy z listami

@@ -139,7 +139,7 @@ def assign_card_menu():
         if selected_card is None:
             return
 
-        dh.assign_card_id(selected_person['id'], selected_card)
+        dh.assign_card(selected_person['id'], selected_card)
         print("\nCard assigned")
 
 def unassign_card_menu():
@@ -154,7 +154,7 @@ def unassign_card_menu():
         if selected_person is None:
             return
 
-        dh.remove_card_id(selected_person['id'])
+        dh.unassign_card(selected_person['id'])
         print("\nCard unassigned")
 
 def report_menu():
