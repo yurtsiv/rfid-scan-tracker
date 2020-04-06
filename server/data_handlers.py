@@ -93,10 +93,11 @@ def add_card(id):
   global cards
 
   if id in cards:
-    raise Exception("Card already registered")
+    raise Exception(f"Card {id} already exists")
 
   cards.append(id)
   write_data(cards_file, cards)
+  return id
 
 def delete_card(id):
   global cards

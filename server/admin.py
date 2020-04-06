@@ -39,12 +39,32 @@ def delete_person_menu():
   if people == []:
     print("\nNo people")
   else:
-    selected_person = print_and_pick_with_cancel(people, "Select a person: ")
+    selected_person = print_and_pick_with_cancel(people, "Select person: ")
     if selected_person is None:
       return
     
     delete_person(selected_person['id'])
     print("\nPerson deleted")
+
+def add_card_menu():
+  card_id = input_int(0, 9999999999, "Enter RFID Number: ")
+  card = add_card(card_id)
+  print("\nCard added")
+  print(card)
+
+def delete_card_menu():
+  cards = get_cards()
+  
+  if cards == []:
+    print("\nNo cards")
+  else:
+    selected_card = print_and_pick_with_cancel(cards, "Select card: ")
+    if selected_card is None:
+      return
+    
+    delete_card(selected_card)
+    print("\nCard deleted")
+
 
 def add_terminal_menu():
   name = input("\nEnter terminal name: ")
@@ -74,7 +94,7 @@ def assign_card_menu():
   elif people == []:
     print("\nNo emplyees or all of them have card assigned")
   else:
-    selected_person = print_and_pick_with_cancel(people, "Select employee: ")
+    selected_person = print_and_pick_with_cancel(people, "Select person: ")
     if selected_person is None:
       return
 
@@ -111,6 +131,8 @@ def report_menu():
 menu_items = [
   ("Add person", add_person_menu),
   ("Delete person", delete_person_menu),
+  ("Add card", add_card_menu),
+  ("Delete card", delete_card_menu),
   ("Add terminal", add_terminal_menu),
   ("Delete terminal", delete_terminal_menu),
   ("Assign card", assign_card_menu),
