@@ -1,23 +1,23 @@
 import os
 import errno
 import json
-import uuid 
+import uuid
 from datetime import datetime
 from list_utils import find_by, diff
 
 dirname = os.path.dirname(__file__)
 
-people_file = os.path.join(dirname, "data/people.json")
-terminals_file = os.path.join(dirname, "data/terminals.json")
-scans_file = os.path.join(dirname, "data/scans.json")
-cards_file = os.path.join(dirname, "data/cards.json")
+PEOPLE_FILE_PATH = os.path.join(dirname, "data/people.json")
+TERMINALS_FILE_PATH = os.path.join(dirname, "data/terminals.json")
+SCANS_FILE_PATH = os.path.join(dirname, "data/scans.json")
+SCANS_FILE_PATH = os.path.join(dirname, "data/cards.json")
 
 def read_data(path):
     if os.path.isfile(path):
-        f = open(path, "r")
-        fContent = f.read()
-        f.close()
-        return json.loads(fContent)
+        opened_file = open(path, "r")
+        file_content = opened_file.read()
+        opened_file.close()
+        return json.loads(file_content)
 
     return []
 
@@ -30,15 +30,15 @@ def write_data(path, array):
             if exc.errno != errno.EEXIST:
                 raise
 
-    f = open(path, "w")
-    jsonTxt = json.dumps(array, indent=4, default=str)
-    f.write(jsonTxt)
-    f.close()
+    opened_file = open(path, "w")
+    json_str = json.dumps(array, indent=4, default=str)
+    opened_file.write(json_str)
+    opened_file.close()
 
-people = read_data(people_file)
-terminals = read_data(terminals_file)
-scans = read_data(scans_file)
-cards = read_data(cards_file)
+people = read_data(PEOPLE_FILE_PATH)
+terminals = read_data(TERMINALS_FILE_PATH)
+scans = read_data(SCANS_FILE_PATH)
+cards = read_data(SCANS_FILE_PATH)
 
 def get_terminals():
     global terminals
@@ -52,7 +52,7 @@ def get_people():
 
 def get_cards():
     global cards
-    
+
     return cards
 
 def filter_people(key):
@@ -64,7 +64,6 @@ def filter_scans(key):
     global scans
 
     return [r for r in scans if key(r)]
-    
 
 def get_people_with_card():
     return filter_people(lambda w: w.get('card_id') is not None)
@@ -96,29 +95,29 @@ def add_card(id):
         raise Exception(f"Card {id} already exists")
 
     cards.append(id)
-    write_data(cards_file, cards)
+    write_data(SCANS_FILE_PATH, cards)
     return id
 
 def delete_card(id):
     global cards
 
     cards.remove(id)
-    write_data(cards_file, cards)
+    write_data(SCANS_FILE_PATH, cards)
 
 def add_terminal(name):
     global terminals
 
     id = uuid.uuid1().int
-    terminal = { 'name': name, 'id': id }
+    terminal = {'name': name, 'id': id}
     terminals.append(terminal)
-    write_data(terminals_file, terminals)
+    write_data(TERMINALS_FILE_PATH, terminals)
     return terminal
 
 def delete_terminal(id):
     global terminals
 
     terminals = list(filter(lambda t: t['id'] != id, terminals))
-    write_data(terminals_file, terminals)
+    write_data(TERMINALS_FILE_PATH, terminals)
 
 def add_person(full_name):
     global people
@@ -126,30 +125,28 @@ def add_person(full_name):
     id = uuid.uuid1().int
     person = {'full_name': full_name, 'id': id}
     people.append(person)
-    write_data(people_file, people)
+    write_data(PEOPLE_FILE_PATH, people)
     return person
 
-    
 def delete_person(id):
     global people
 
     people = list(filter(lambda t: t['id'] != id, people))
-    write_data(people_file, people)
-    
+    write_data(PEOPLE_FILE_PATH, people)
 
 def assign_card_id(person_id, card_id):
     global people
 
     person = find_person("id", person_id)
     person['card_id'] = card_id
-    write_data(people_file, people)
+    write_data(PEOPLE_FILE_PATH, people)
 
 def remove_card_id(person_id):
     global people
 
     person = find_person("id", person_id)
     del person['card_id']
-    write_data(people_file, people)
+    write_data(PEOPLE_FILE_PATH, people)
 
 def add_scan(terminal_id, card_id):
     global people
@@ -160,10 +157,10 @@ def add_scan(terminal_id, card_id):
     time = datetime.now()
     person = find_person("card_id", card_id)
     terminal = find_terminal("id", terminal_id)
- 
+
     if (not card_id in cards) or (terminal is None) or (person is None):
-        scans.append({ 'card_id': card_id, 'terminal_id': terminal_id, 'time': time })
-        write_data(scans_file, scans)
+        scans.append({'card_id': card_id, 'terminal_id': terminal_id, 'time': time})
+        write_data(SCANS_FILE_PATH, scans)
 
         err_msg = ""
         if not card_id in cards:
@@ -181,5 +178,5 @@ def add_scan(terminal_id, card_id):
             'person_id': person['id'],
             'time': time
         })
-    
-        write_data(scans_file, scans)
+
+        write_data(SCANS_FILE_PATH, scans)
