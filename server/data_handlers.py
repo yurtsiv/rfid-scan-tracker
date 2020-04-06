@@ -123,8 +123,10 @@ def add_person(full_name):
   global people
 
   id = uuid.uuid1().int
-  people.append({ 'full_name': full_name, 'id': id })
+  person = {'full_name': full_name, 'id': id}
+  people.append(person)
   write_data(people_file, people)
+  return person
 
   
 def delete_person(id):

@@ -28,6 +28,24 @@ def print_and_pick_with_cancel(l, label="Select an item: "):
   picked_item = pick_from_list(l + [None], label=label)
   return picked_item
 
+def add_person_menu():
+  full_name = input("\nEnter full name: ")
+  person = add_person(full_name)
+  print("\nPerson added")
+  print(person)
+
+def delete_person_menu():
+  people = get_people()
+  if people == []:
+    print("\nNo people")
+  else:
+    selected_person = print_and_pick_with_cancel(people, "Select a person: ")
+    if selected_person is None:
+      return
+    
+    delete_person(selected_person['id'])
+    print("\nPerson deleted")
+
 def add_terminal_menu():
   name = input("\nEnter terminal name: ")
   terminal = add_terminal(name)
@@ -91,6 +109,8 @@ def report_menu():
   print("Report generated")
 
 menu_items = [
+  ("Add person", add_person_menu),
+  ("Delete person", delete_person_menu),
   ("Add terminal", add_terminal_menu),
   ("Delete terminal", delete_terminal_menu),
   ("Assign card", assign_card_menu),
