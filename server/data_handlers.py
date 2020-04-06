@@ -1,12 +1,15 @@
+import os
 import json
 import uuid 
 from datetime import datetime
 from list_utils import find_by, diff
 
-workers_file = "data/workers.json"
-terminals_file = "data/terminals.json"
-registrations_file = "data/registrations.json"
-cards_file = "data/cards.json"
+dirname = os.path.dirname(__file__)
+
+workers_file = os.path.join(dirname, "data/workers.json")
+terminals_file = os.path.join(dirname, "data/terminals.json")
+registrations_file = os.path.join(dirname, "data/registrations.json")
+cards_file = os.path.join(dirname, "data/cards.json")
 
 def read_data(path):
   f = open(path, "r")

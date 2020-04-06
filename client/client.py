@@ -3,11 +3,21 @@ import sys, traceback
 import paho.mqtt.client as mqtt
 
 settings = json.loads(open('../settings.json').read())
+_, client_id = sys.argv
 
 client = mqtt.Client()
 client.connect(settings['mqtt_broker']['url'], 1883, 60)
 
-def publish(sub_topic, value):
-  client.publish(settings['top_level_topic'] + '/' + sub_topic, value)
+def wrap_value(value):
+  return {
+    'client_id': int(client_id),
+    'value': value
+  }
 
-publish(settings['sub_topics']['scan_card'], 123)
+def publish(topic, value):
+  client.publish(
+    topic,
+    json.dumps(wrap_value(value))
+  )
+
+publish(settings['topics']['scan_card'], 123)
