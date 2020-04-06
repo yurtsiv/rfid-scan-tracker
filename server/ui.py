@@ -56,15 +56,15 @@ def assign_card_menu():
   elif people == []:
     print("\nNo emplyees or all of them have card assigned")
   else:
-    selected_worker = print_and_pick_with_cancel(people, "Select employee: ")
-    if selected_worker is None:
+    selected_person = print_and_pick_with_cancel(people, "Select employee: ")
+    if selected_person is None:
       return
 
     selected_card = print_and_pick_with_cancel(cards, "Select card: ")
     if selected_card is None:
       return
 
-    assign_card_id(selected_worker['id'], selected_card)
+    assign_card_id(selected_person['id'], selected_card)
     print("\nCard assigned")
 
 def unassign_card_menu():
@@ -73,53 +73,28 @@ def unassign_card_menu():
   if people == []:
     print("\nNo employees to unassign card from")
   else:
-    selected_worker = print_and_pick_with_cancel(people, "Select worker: ")
-    if selected_worker is None:
+    selected_person = print_and_pick_with_cancel(people, "Select person: ")
+    if selected_person is None:
       return
 
-    remove_card_id(selected_worker['id'])
+    remove_card_id(selected_person['id'])
     print("\nCard unassigned")
-
-def register_menu():
-  cards = get_cards()
-  terminals = get_terminals()
-
-  cards_select_items = [
-    [-1, -1, -1, -1]
-  ] + cards
-
-  terminals_select_items = [
-    {"id": -1, "name": "Unknown terminal"}
-  ] + terminals
-
-  selected_terminal = print_and_pick_with_cancel(terminals_select_items, "Select terminal: ")
-  if selected_terminal is None:
-    return
-
-  selected_card = print_and_pick_with_cancel(cards_select_items, "Select card: ")
-  if selected_card is None:
-    return
-
-
-  add_scan(selected_terminal["id"], selected_card)
-  print("\nEmployee registered")
 
 def report_menu():
   people = get_people()
 
-  selected_worker = print_and_pick_with_cancel(people, "Select worker: ")
-  if selected_worker is None:
+  selected_person = print_and_pick_with_cancel(people, "Select person: ")
+  if selected_person is None:
     return
   
-  generate_report(selected_worker['id'])
+  generate_report(selected_person['id'])
   print("Report generated")
 
 menu_items = [
   ("Add terminal", add_terminal_menu),
   ("Delete terminal", delete_terminal_menu),
-  ("Assign card to employee", assign_card_menu),
-  ("Unassign card from employee", unassign_card_menu),
-  ("Register", register_menu),
+  ("Assign card", assign_card_menu),
+  ("Unassign card", unassign_card_menu),
   ("Generate report", report_menu),
   ("Exit", sys.exit)
 ]

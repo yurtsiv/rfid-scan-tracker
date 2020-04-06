@@ -1,9 +1,9 @@
 import csv
-from data_handlers import filter_scans, find_worker
+from data_handlers import filter_scans, find_person
 from list_utils import group_into_pairs
 
-def write_to_csv(worker_name, regs_groups):
-  with open(worker_name.replace(" ", "_") + '_report.csv', 'w') as csvfile:
+def write_to_csv(person_name, regs_groups):
+  with open(person_name.replace(" ", "_") + '_report.csv', 'w') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
 
     writer.writerow([
@@ -37,12 +37,12 @@ def write_to_csv(worker_name, regs_groups):
 def generate_report(person_id):
   global scans
 
-  worker = find_worker('id', person_id)
-  if worker is None:
-    raise "Worker is not registered in the system"
+  person = find_person('id', person_id)
+  if person is None:
+    raise "person is not registered in the system"
 
   scans = filter_scans(lambda r: r.get('person_id') == person_id)
   sorted_regs = sorted(scans, key=lambda r: r['time'])
   regs_groups = group_into_pairs(sorted_regs)
 
-  write_to_csv(worker['full_name'], regs_groups)
+  write_to_csv(person['full_name'], regs_groups)

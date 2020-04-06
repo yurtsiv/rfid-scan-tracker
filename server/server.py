@@ -18,6 +18,7 @@ def on_message(client, userdata, msg):
   
   topic = msg.topic
   payload = None
+
   try:
     payload = json.loads(msg.payload)
   except json.JSONDecodeError:

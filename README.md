@@ -88,12 +88,12 @@ ui.py
 * `get_terminals` - zwraca listę wszystkich terminalów
 * `get_people` - zwraca listę wszystkich pracowników
 * `get_cards` - zwraca listę wszystkich kart
-* `filter_people` - filtruje workerów po zadanym predykacie
-* `filter_scans` - filtruje workerów po zadanym predykacie
+* `filter_people` - filtruje personów po zadanym predykacie
+* `filter_scans` - filtruje personów po zadanym predykacie
 * `get_people_with_card` - zwraca listę pracowników którzy mają kartę
 * `get_people_without_card` - zwraca listę pracowników którzy nie mają karty
 * `get_not_assigned_cards` - zwraca listę kart które nie są przypisane do pracownika
-* `find_worker` - zwraca jednego pracownika po zadanym kluczu i znaczeniu
+* `find_person` - zwraca jednego pracownika po zadanym kluczu i znaczeniu
 * `find_terminal` - zwraca jeden terminal po zadanym kluczu i znaczeniu
 * `add_card` - dodje kartę
 * `delete_card` - usuwa kartę

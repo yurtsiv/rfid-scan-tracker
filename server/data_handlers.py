@@ -65,10 +65,10 @@ def get_not_assigned_cards():
   assigned_cards = list(map(lambda w: w['card_id'], people_with_cards))
   return diff(cards, assigned_cards)
 
-def find_worker(key, val):
+def find_person(key, val):
   global people
 
-  return find_by(people, key=lambda worker: worker.get(key) == val)
+  return find_by(people, key=lambda person: person.get(key) == val)
 
 def find_terminal(key, val):
   global terminals
@@ -105,7 +105,7 @@ def delete_terminal(id):
   terminals = list(filter(lambda t: t['id'] != id, terminals))
   write_data(terminals_file, terminals)
 
-def add_worker(full_name):
+def add_person(full_name):
   global people
 
   id = uuid.uuid1().int
@@ -113,7 +113,7 @@ def add_worker(full_name):
   write_data(people_file, people)
 
   
-def delete_worker(id):
+def delete_person(id):
   global people
 
   people = list(filter(lambda t: t['id'] != id, people))
@@ -123,15 +123,15 @@ def delete_worker(id):
 def assign_card_id(person_id, card_id):
   global people
 
-  worker = find_worker("id", person_id)
-  worker['card_id'] = card_id
+  person = find_person("id", person_id)
+  person['card_id'] = card_id
   write_data(people_file, people)
 
 def remove_card_id(person_id):
   global people
 
-  worker = find_worker("id", person_id)
-  del worker['card_id']
+  person = find_person("id", person_id)
+  del person['card_id']
   write_data(people_file, people)
 
 def add_scan(terminal_id, card_id):
@@ -141,17 +141,17 @@ def add_scan(terminal_id, card_id):
   global cards
 
   time = datetime.now()
-  worker = find_worker("card_id", card_id)
+  person = find_person("card_id", card_id)
   terminal = find_terminal("id", terminal_id)
  
-  if (not card_id in cards) or (worker is None ) or (terminal is None):
+  if (not card_id in cards) or (person is None ) or (terminal is None):
     print("Card ID or terminal isn't known to the system")
     scans.append({ 'card_id': card_id, 'terminal_id': terminal_id, 'time': time })
   else:
     scans.append({
       'card_id': card_id,
       'terminal_id': terminal_id,
-      'person_id': worker['id'],
+      'person_id': person['id'],
       'time': time
     })
   
