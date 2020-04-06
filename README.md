@@ -9,7 +9,7 @@ data/
 --cards.json
 --scans.json
 --terminals.json
---workers.json  
+--people.json  
 data_handlers.py
 list_utils.py
 main.py
@@ -36,20 +36,20 @@ ui.py
   ```
   [
     {
-      "cardId": [148, 35, 65, 119],
-      "terminalId": 144751913515096091035495503208707423722,
+      "card_id": [148, 35, 65, 119],
+      "terminal_id": 144751913515096091035495503208707423722,
       "time": "2020-03-30 19:38:15.594836",
-      "workerId": 1
+      "person_id": 1
     },
     {
-      "cardId": [130, 21, 65, 119],
-      "terminalId": 12344913515096091035495503208707543,
+      "card_id": [130, 21, 65, 119],
+      "terminal_id": 12344913515096091035495503208707543,
       "time": "2020-03-30 19:39:15.594836",
     }
   ]
 
   ```
-  P.S. jeśli niema "workerId" to ktoś zczytał niewadomą kartę lub na niewiadomy terminale)
+  P.S. jeśli niema "person_id" to ktoś zczytał niewadomą kartę lub na niewiadomy terminale)
 
 
 `data/terminals.json` - plik zawierający dany o terminalach (klientach)
@@ -64,20 +64,20 @@ ui.py
   ]
   ```
   
-`data/workers.json` - plik zawierający dany o pracownikach
+`data/people.json` - plik zawierający dany o pracownikach
 
   przykład:
   ```
   [
     {
       "id": 1,
-      "fullName": "John Doe",
-      "cardId": [148, 35, 65, 119]
+      "full_name": "John Doe",
+      "card_id": [148, 35, 65, 119]
     },
     
     {
       "id": 2,
-      "fullName": "Michael Smith"
+      "full_name": "Michael Smith"
     }
   ]
   ```
@@ -86,12 +86,12 @@ ui.py
 * `read_data` - czyta i prasuje dane z pliku JSON
 * `write_data` - koduje i zapisuje dane do pliku JSON
 * `get_terminals` - zwraca listę wszystkich terminalów
-* `get_workers` - zwraca listę wszystkich pracowników
+* `get_people` - zwraca listę wszystkich pracowników
 * `get_cards` - zwraca listę wszystkich kart
-* `filter_workers` - filtruje workerów po zadanym predykacie
+* `filter_people` - filtruje workerów po zadanym predykacie
 * `filter_scans` - filtruje workerów po zadanym predykacie
-* `get_workers_with_card` - zwraca listę pracowników którzy mają kartę
-* `get_workers_without_card` - zwraca listę pracowników którzy nie mają karty
+* `get_people_with_card` - zwraca listę pracowników którzy mają kartę
+* `get_people_without_card` - zwraca listę pracowników którzy nie mają karty
 * `get_not_assigned_cards` - zwraca listę kart które nie są przypisane do pracownika
 * `find_worker` - zwraca jednego pracownika po zadanym kluczu i znaczeniu
 * `find_terminal` - zwraca jeden terminal po zadanym kluczu i znaczeniu

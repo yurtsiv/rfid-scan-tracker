@@ -18,8 +18,8 @@ def write_to_csv(worker_name, regs_groups):
     for reg_group in regs_groups:
       enter_reg = reg_group[0]
       row = [
-        enter_reg['terminalId'],
-        enter_reg['cardId'],
+        enter_reg['terminal_id'],
+        enter_reg['card_id'],
         enter_reg['time']
       ]
 
@@ -27,22 +27,22 @@ def write_to_csv(worker_name, regs_groups):
         exit_reg = reg_group[1]
 
         row = row + [
-          exit_reg['terminalId'],
-          exit_reg['cardId'],
+          exit_reg['terminal_id'],
+          exit_reg['card_id'],
           exit_reg['time']
         ]
       
       writer.writerow(row)
 
-def generate_report(workerId):
+def generate_report(person_id):
   global scans
 
-  worker = find_worker('id', workerId)
+  worker = find_worker('id', person_id)
   if worker is None:
     raise "Worker is not registered in the system"
 
-  scans = filter_scans(lambda r: r.get('workerId') == workerId)
+  scans = filter_scans(lambda r: r.get('person_id') == person_id)
   sorted_regs = sorted(scans, key=lambda r: r['time'])
   regs_groups = group_into_pairs(sorted_regs)
 
-  write_to_csv(worker['fullName'], regs_groups)
+  write_to_csv(worker['full_name'], regs_groups)

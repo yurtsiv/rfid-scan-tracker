@@ -1,22 +1,27 @@
 [
   {
-    "cardId": 123,
-    "terminalId": "123",
+    "card_id": 123,
+    "terminal_id": "123",
     "time": "2020-04-06 16:50:32.066310"
   },
   {
-    "cardId": 123,
-    "terminalId": "123",
+    "card_id": 123,
+    "terminal_id": "123",
     "time": "2020-04-06 16:50:35.335035"
   },
   {
-    "cardId": 123,
-    "terminalId": 123,
+    "card_id": 123,
+    "terminal_id": 123,
     "time": "2020-04-06 16:51:29.811952"
   },
   {
-    "cardId": 123,
-    "terminalId": 123,
+    "card_id": 123,
+    "terminal_id": 123,
     "time": "2020-04-06 17:25:01.071049"
+  },
+  {
+    "card_id": 123,
+    "terminal_id": 123,
+    "time": "2020-04-06 17:33:20.742797"
   }
 ]

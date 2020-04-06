@@ -6,7 +6,7 @@ from list_utils import find_by, diff
 
 dirname = os.path.dirname(__file__)
 
-workers_file = os.path.join(dirname, "data/workers.json")
+people_file = os.path.join(dirname, "data/people.json")
 terminals_file = os.path.join(dirname, "data/terminals.json")
 scans_file = os.path.join(dirname, "data/scans.json")
 cards_file = os.path.join(dirname, "data/cards.json")
@@ -21,7 +21,7 @@ def write_data(path, array):
   jsonTxt = json.dumps(array, indent=2, default=str)
   f.write(jsonTxt)
 
-workers = read_data(workers_file)
+people = read_data(people_file)
 terminals = read_data(terminals_file)
 scans = read_data(scans_file)
 cards = read_data(cards_file)
@@ -31,20 +31,20 @@ def get_terminals():
 
   return terminals
 
-def get_workers():
-  global workers
+def get_people():
+  global people
 
-  return workers
+  return people
 
 def get_cards():
   global cards
   
   return cards
 
-def filter_workers(key):
-  global workers
+def filter_people(key):
+  global people
 
-  return [w for w in workers if key(w)]
+  return [w for w in people if key(w)]
 
 def filter_scans(key):
   global scans
@@ -52,23 +52,23 @@ def filter_scans(key):
   return [r for r in scans if key(r)]
   
 
-def get_workers_with_card():
-  return filter_workers(lambda w: w.get('cardId') is not None)
+def get_people_with_card():
+  return filter_people(lambda w: w.get('card_id') is not None)
 
-def get_workers_without_card():
-  return filter_workers(lambda w: w.get('cardId') is None)
+def get_people_without_card():
+  return filter_people(lambda w: w.get('card_id') is None)
 
 def get_not_assigned_cards():
   global cards
 
-  workers_with_cards = get_workers_with_card()
-  assigned_cards = list(map(lambda w: w['cardId'], workers_with_cards))
+  people_with_cards = get_people_with_card()
+  assigned_cards = list(map(lambda w: w['card_id'], people_with_cards))
   return diff(cards, assigned_cards)
 
 def find_worker(key, val):
-  global workers
+  global people
 
-  return find_by(workers, key=lambda worker: worker.get(key) == val)
+  return find_by(people, key=lambda worker: worker.get(key) == val)
 
 def find_terminal(key, val):
   global terminals
@@ -105,53 +105,53 @@ def delete_terminal(id):
   terminals = list(filter(lambda t: t['id'] != id, terminals))
   write_data(terminals_file, terminals)
 
-def add_worker(fullName):
-  global workers
+def add_worker(full_name):
+  global people
 
   id = uuid.uuid1().int
-  workers.append({ 'fullName': fullName, 'id': id })
-  write_data(workers_file, workers)
+  people.append({ 'full_name': full_name, 'id': id })
+  write_data(people_file, people)
 
   
 def delete_worker(id):
-  global workers
+  global people
 
-  workers = list(filter(lambda t: t['id'] != id, workers))
-  write_data(workers_file, workers)
+  people = list(filter(lambda t: t['id'] != id, people))
+  write_data(people_file, people)
   
 
-def assign_card_id(workerId, cardId):
-  global workers
+def assign_card_id(person_id, card_id):
+  global people
 
-  worker = find_worker("id", workerId)
-  worker['cardId'] = cardId
-  write_data(workers_file, workers)
+  worker = find_worker("id", person_id)
+  worker['card_id'] = card_id
+  write_data(people_file, people)
 
-def remove_card_id(workerId):
-  global workers
+def remove_card_id(person_id):
+  global people
 
-  worker = find_worker("id", workerId)
-  del worker['cardId']
-  write_data(workers_file, workers)
+  worker = find_worker("id", person_id)
+  del worker['card_id']
+  write_data(people_file, people)
 
-def add_scan(terminalId, cardId):
-  global workers
+def add_scan(terminal_id, card_id):
+  global people
   global terminals
   global scans
   global cards
 
   time = datetime.now()
-  worker = find_worker("cardId", cardId)
-  terminal = find_terminal("id", terminalId)
+  worker = find_worker("card_id", card_id)
+  terminal = find_terminal("id", terminal_id)
  
-  if (not cardId in cards) or (worker is None ) or (terminal is None):
+  if (not card_id in cards) or (worker is None ) or (terminal is None):
     print("Card ID or terminal isn't known to the system")
-    scans.append({ 'cardId': cardId, 'terminalId': terminalId, 'time': time })
+    scans.append({ 'card_id': card_id, 'terminal_id': terminal_id, 'time': time })
   else:
     scans.append({
-      'cardId': cardId,
-      'terminalId': terminalId,
-      'workerId': worker['id'],
+      'card_id': card_id,
+      'terminal_id': terminal_id,
+      'person_id': worker['id'],
       'time': time
     })
   

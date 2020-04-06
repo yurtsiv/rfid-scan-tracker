@@ -49,14 +49,14 @@ def delete_terminal_menu():
 
 def assign_card_menu():
   cards = get_not_assigned_cards()
-  workers = get_workers_without_card()
+  people = get_people_without_card()
 
   if cards == []:
     print("\nAll cards are already assigned")
-  elif workers == []:
+  elif people == []:
     print("\nNo emplyees or all of them have card assigned")
   else:
-    selected_worker = print_and_pick_with_cancel(workers, "Select employee: ")
+    selected_worker = print_and_pick_with_cancel(people, "Select employee: ")
     if selected_worker is None:
       return
 
@@ -68,12 +68,12 @@ def assign_card_menu():
     print("\nCard assigned")
 
 def unassign_card_menu():
-  workers = get_workers_with_card()
+  people = get_people_with_card()
 
-  if workers == []:
+  if people == []:
     print("\nNo employees to unassign card from")
   else:
-    selected_worker = print_and_pick_with_cancel(workers, "Select worker: ")
+    selected_worker = print_and_pick_with_cancel(people, "Select worker: ")
     if selected_worker is None:
       return
 
@@ -105,9 +105,9 @@ def register_menu():
   print("\nEmployee registered")
 
 def report_menu():
-  workers = get_workers()
+  people = get_people()
 
-  selected_worker = print_and_pick_with_cancel(workers, "Select worker: ")
+  selected_worker = print_and_pick_with_cancel(people, "Select worker: ")
   if selected_worker is None:
     return
   
