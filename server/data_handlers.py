@@ -1,4 +1,5 @@
 import os
+import errno
 import json
 import uuid 
 from datetime import datetime
@@ -12,14 +13,27 @@ scans_file = os.path.join(dirname, "data/scans.json")
 cards_file = os.path.join(dirname, "data/cards.json")
 
 def read_data(path):
-  f = open(path, "r")
-  fContent = f.read()
-  return json.loads(fContent)
+  if os.path.isfile(path):
+    f = open(path, "r")
+    fContent = f.read()
+    f.close()
+    return json.loads(fContent)
+
+  return []
 
 def write_data(path, array):
+  path_dir = os.path.dirname(path)
+  if not os.path.exists(path_dir):
+    try:
+      os.makedirs(path_dir)
+    except OSError as exc:
+      if exc.errno != errno.EEXIST:
+        raise
+
   f = open(path, "w")
   jsonTxt = json.dumps(array, indent=2, default=str)
   f.write(jsonTxt)
+  f.close()
 
 people = read_data(people_file)
 terminals = read_data(terminals_file)
@@ -146,6 +160,7 @@ def add_scan(terminal_id, card_id):
  
   if (not card_id in cards) or (terminal is None) or (person is None):
     scans.append({ 'card_id': card_id, 'terminal_id': terminal_id, 'time': time })
+    write_data(scans_file, scans)
 
     err_msg = ""
     if not card_id in cards:
@@ -164,4 +179,4 @@ def add_scan(terminal_id, card_id):
       'time': time
     })
   
-  write_data(scans_file, scans)
+    write_data(scans_file, scans)
