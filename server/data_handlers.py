@@ -79,7 +79,7 @@ def add_card(id):
   global cards
 
   if id in cards:
-    raise "Card already registered"
+    raise Exception("Card already registered")
 
   cards.append(id)
   write_data(cards_file, cards)
@@ -147,12 +147,15 @@ def add_scan(terminal_id, card_id):
   if (not card_id in cards) or (terminal is None) or (person is None):
     scans.append({ 'card_id': card_id, 'terminal_id': terminal_id, 'time': time })
 
+    err_msg = ""
     if not card_id in cards:
-      print(f"Card {card_id} isn't registered in the system")
+      err_msg = f"Card {card_id} isn't registered in the system"
     elif terminal is None:
-      print(f"Terminal {terminal_id} isn't registered in the system")
+      err_msg = f"Terminal {terminal_id} isn't registered in the system"
     else:
-      print(f"Card {card_id} isn't assigned to any person")
+      err_msg = f"Card {card_id} isn't assigned to any person"
+
+    raise Exception(err_msg)
   else:
     scans.append({
       'card_id': card_id,

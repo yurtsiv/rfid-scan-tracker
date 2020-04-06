@@ -110,6 +110,5 @@ def start_menu():
 while True:
   try:
     start_menu()
-  except Exception:
-    err_type, val, trace = sys.exc_info()
-    traceback.print_exception(err_type, val, trace)
+  except Exception as err:
+    print(err)
