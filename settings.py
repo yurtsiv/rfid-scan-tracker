@@ -1,3 +1,7 @@
+"""
+Global settings
+"""
+
 MQTT_BROKER = {
     'url': "mqtt.eclipse.org",
     'username': "",

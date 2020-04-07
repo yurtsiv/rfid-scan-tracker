@@ -34,7 +34,7 @@ In order to start the actual server run
 python3 server.py
 ```
 
-It will start listening to incoming messages, log those to the console and collect information on card scannings comming from terminals.
+It will start listening to incoming messages, log those to the console and collect information on cards scanning comming from terminals.
 
 ### Running the client on a terminal
 
@@ -45,4 +45,4 @@ python3 client.py <Terminal ID>
 
 where  `<Terminal ID>` is a uniq ID of a terminal which you get when adding a terminal from the admin panel.
 
-It will start listening to card scannings and publish those to the broker.
+It will start listening to cards scanning and publish card ID over MQTT.

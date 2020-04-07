@@ -1,5 +1,6 @@
 """
-UI for controlling the server
+UI for editing data in the system
+and generating reports
 """
 
 import sys

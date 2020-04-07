@@ -1,3 +1,9 @@
+"""
+App server which listens to incoming messages
+and collects information on card scannings coming
+from clients/terminals
+"""
+
 import sys
 import json
 import paho.mqtt.client as mqtt

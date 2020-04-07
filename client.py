@@ -1,3 +1,8 @@
+"""
+The client which runs on a RaspberryPI.
+Listens to card scanning and publishes card ID
+"""
+
 import json
 import time
 import sys, traceback
