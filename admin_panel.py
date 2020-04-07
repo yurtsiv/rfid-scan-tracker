@@ -77,7 +77,7 @@ def delete_person_menu():
 def add_card_menu():
     """Menu for adding new card"""
 
-    card_id = input_int(0, 9999999999, "Enter RFID Number: ")
+    card_id = input("Enter RFID Number: ")
     card = dh.add_card(card_id)
     print("\nCard added")
     print(card)

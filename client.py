@@ -10,6 +10,7 @@ import paho.mqtt.client as mqtt
 from settings import MQTT_BROKER as BROKER, TOPICS
 
 TERMINAL_ID = None
+
 try:
     TERMINAL_ID = int(sys.argv[1])
 except Exception:
@@ -50,7 +51,11 @@ print(f"Connecting to the broker {BROKER['url']}")
 client.connect(BROKER['url'], 1883, 60)
 client.loop_start()
 
-cards = [31312]
+cards = [
+    "123123123",
+    "123123122",
+    "432432432"
+]
 
 while True:
     for card in cards:

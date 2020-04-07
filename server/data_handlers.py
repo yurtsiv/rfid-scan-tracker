@@ -134,6 +134,9 @@ def add_card(card_id):
     Throw an error if such card already exists.
     """
 
+    if card_id is None or not card_id.isdigit() or len(card_id) != 9:
+        raise Exception(f"Invalid card ID {card_id}. It should consist of 9 numbers.")
+
     cards = get_cards()
 
     if card_id in cards:
