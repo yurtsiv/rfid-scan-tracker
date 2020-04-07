@@ -6,5 +6,8 @@ dirname = os.path.dirname(__file__)
 settings_path = os.path.join(dirname, '../settings.json')
 
 def get_settings():
-    return json.loads(open(settings_path).read())
+    """
+    Load settings from settings.json
+    """
 
+    return json.loads(open(settings_path).read())

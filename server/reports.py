@@ -3,6 +3,10 @@ from data_handlers import filter_scans, find_person
 from list_utils import group_into_pairs
 
 def write_to_csv(person_name, regs_groups):
+    """
+    Helper function for saving generated
+    report into a CSV file
+    """
     with open(person_name.replace(" ", "_") + '_report.csv', 'w') as csvfile:
         writer = csv.writer(csvfile, delimiter=',')
 
@@ -35,11 +39,13 @@ def write_to_csv(person_name, regs_groups):
             writer.writerow(row)
 
 def generate_report(person_id):
-    global scans
+    """
+    Generate the report for a particular person
+    """
 
     person = find_person('id', person_id)
     if person is None:
-        raise "person is not registered in the system"
+        raise Exception(f"No person wtih ID {person_id} registered in the system")
 
     scans = filter_scans(lambda r: r.get('person_id') == person_id)
     sorted_regs = sorted(scans, key=lambda r: r['time'])
