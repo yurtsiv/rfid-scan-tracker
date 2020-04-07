@@ -3,8 +3,8 @@ UI for controlling the server
 """
 
 import sys
-import data_handlers as dh
-import reports
+import server.data_handlers as dh
+import server.reports as reports
 
 def input_int(min_val, max_val, label):
     """
