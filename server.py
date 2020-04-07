@@ -7,7 +7,7 @@ from clients/terminals
 import sys
 import json
 import paho.mqtt.client as mqtt
-from server.data_handlers import add_scan
+from api.data_handlers import add_scan
 from settings import MQTT_BROKER as BROKER, TOP_LEVEL_TOPIC, TOPICS
 
 def on_connect(client, userdata, flags, rc):

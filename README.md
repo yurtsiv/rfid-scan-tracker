@@ -55,3 +55,8 @@ python3 client.py 116556985421650370293137446037868150250
 For now it just simulates scanning of predefined cards each 5 seconds.
 
 TODO: listening to actual cards scanning from RFID detector
+
+
+## Code
+
+For detailed code documentation look into CODE_DOCS.md

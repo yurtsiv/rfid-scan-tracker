@@ -1,3 +1,7 @@
+"""
+A few helpers for working with lists
+"""
+
 def find_by(l, key):
     """
     Find an element in a list by a specified condition

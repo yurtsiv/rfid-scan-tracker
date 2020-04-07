@@ -1,6 +1,10 @@
+"""
+Report generation functionality
+"""
+
 import csv
-from server.data_handlers import filter_scans, find_person
-from server.list_utils import group_into_pairs
+from api.data_handlers import filter_scans, find_person
+from api.list_utils import group_into_pairs
 
 def write_to_csv(person_name, regs_groups):
     """

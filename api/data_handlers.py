@@ -7,7 +7,7 @@ import json
 import os
 import uuid
 from datetime import datetime
-from server.list_utils import find_by, diff
+from api.list_utils import find_by, diff
 
 DIRNAME = os.path.dirname(__file__)
 

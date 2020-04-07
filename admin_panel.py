@@ -4,8 +4,8 @@ and generating reports
 """
 
 import sys
-import server.data_handlers as dh
-import server.reports as reports
+import api.data_handlers as dh
+import api.reports as reports
 
 def input_int(min_val, max_val, label):
     """
