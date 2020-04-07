@@ -59,4 +59,4 @@ TODO: listening to actual cards scanning from RFID detector
 
 ## Code
 
-For detailed code documentation look into CODE_DOCS.md
+For detailed code documentation look at [CODE_DOCS.md](https://github.com/yurtsiv/rfid-scan-tracker/blob/master/CODE_DOCS)
