@@ -59,5 +59,5 @@ cards = [
 
 while True:
     for card in cards:
-        time.sleep(2)
+        time.sleep(5)
         publish(TOPICS['scan_card'], card)
