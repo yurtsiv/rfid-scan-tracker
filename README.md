@@ -46,10 +46,12 @@ python3 client.py <Terminal ID>
 
 where  `<Terminal ID>` is a uniq ID of a terminal which you get when adding a terminal from the admin panel.
 
-It will start listening to cards scanning and publish card ID over MQTT.
-
 For quick testing you can use the predefined dummy terminal
 
 ```
 python3 client.py 116556985421650370293137446037868150250
 ```
+
+For now it just simulates scanning of predefined cards each 5 seconds.
+
+TODO: listening to actual cards scanning from RFID detector
