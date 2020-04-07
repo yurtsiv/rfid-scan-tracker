@@ -40,11 +40,7 @@ print(f"Connecting to the broker {broker_url}")
 client.connect(broker_url, 1883, 60)
 client.loop_start()
 
-cards = [
-    [148, 35, 65, 119],
-    [150, 60, 90, 200],
-    [130, 75, 80, 130]
-]
+cards = [31312]
 
 while True:
     for card in cards:

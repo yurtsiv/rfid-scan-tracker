@@ -129,7 +129,7 @@ def assign_card_menu():
     if cards == []:
         print("\nAll cards are already assigned")
     elif people == []:
-        print("\nNo emplyees or all of them have card assigned")
+        print("\nNo people or all of them have card assigned")
     else:
         selected_person = print_and_pick_with_cancel(people, "Select person: ")
         if selected_person is None:
@@ -148,7 +148,7 @@ def unassign_card_menu():
     people = dh.get_people_with_card()
 
     if people == []:
-        print("\nNo employees to unassign card from")
+        print("\nNo people to unassign card from")
     else:
         selected_person = print_and_pick_with_cancel(people, "Select person: ")
         if selected_person is None:

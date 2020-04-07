@@ -11,10 +11,10 @@ from list_utils import find_by, diff
 
 DIRNAME = os.path.dirname(__file__)
 
-PEOPLE_FILE_PATH = os.path.join(DIRNAME, "data/PEOPLE.json")
-TERMINALS_FILE_PATH = os.path.join(DIRNAME, "data/TERMINALS.json")
-SCANS_FILE_PATH = os.path.join(DIRNAME, "data/scans.json")
 CARDS_FILE_PATH = os.path.join(DIRNAME, "data/cards.json")
+PEOPLE_FILE_PATH = os.path.join(DIRNAME, "data/people.json")
+SCANS_FILE_PATH = os.path.join(DIRNAME, "data/scans.json")
+TERMINALS_FILE_PATH = os.path.join(DIRNAME, "data/terminals.json")
 
 def read_data(path):
     """
@@ -49,55 +49,47 @@ def write_data(path, array):
     opened_file.write(json_str)
     opened_file.close()
 
-PEOPLE = read_data(PEOPLE_FILE_PATH)
-TERMINALS = read_data(TERMINALS_FILE_PATH)
-SCANS = read_data(SCANS_FILE_PATH)
-CARDS = read_data(CARDS_FILE_PATH)
-
-def get_terminals():
+def get_cards():
     """
-    Get all terminals
+    Get all cards
     """
 
-    global TERMINALS
-
-    return TERMINALS
+    return read_data(CARDS_FILE_PATH)
 
 def get_people():
     """
     Get all people
     """
 
-    global PEOPLE
+    return read_data(PEOPLE_FILE_PATH)
 
-    return PEOPLE
-
-def get_cards():
+def get_scans():
     """
-    Get all cards
+    Get all scans
     """
 
-    global CARDS
+    return read_data(SCANS_FILE_PATH)
 
-    return CARDS
+def get_terminals():
+    """
+    Get all terminals
+    """
+
+    return read_data(TERMINALS_FILE_PATH)
 
 def filter_people(key):
     """
-    Get peopele by the specified criterion
+    Get peopele by the specified condition
     """
 
-    global PEOPLE
-
-    return [w for w in PEOPLE if key(w)]
+    return [p for p in get_people() if key(p)]
 
 def filter_scans(key):
     """
-    Get scans by the specified criterion
+    Get scans by the specified condition
     """
 
-    global SCANS
-
-    return [r for r in SCANS if key(r)]
+    return [s for s in get_scans() if key(s)]
 
 def get_people_with_card():
     """
@@ -118,29 +110,23 @@ def get_not_assigned_cards():
     Get cards which aren't assigned to any person
     """
 
-    global CARDS
-
     people_with_cards = get_people_with_card()
     assigned_cards = list(map(lambda w: w['card_id'], people_with_cards))
-    return diff(CARDS, assigned_cards)
+    return diff(get_cards(), assigned_cards)
 
 def find_person(key, val):
     """
     Get a person by key and value
     """
 
-    global PEOPLE
-
-    return find_by(PEOPLE, key=lambda person: person.get(key) == val)
+    return find_by(get_people(), key=lambda person: person.get(key) == val)
 
 def find_terminal(key, val):
     """
     Get a terminal by key and value
     """
 
-    global TERMINALS
-
-    return find_by(TERMINALS, key=lambda terminal: terminal.get(key) == val)
+    return find_by(get_terminals(), key=lambda terminal: terminal.get(key) == val)
 
 def add_card(card_id):
     """
@@ -148,13 +134,13 @@ def add_card(card_id):
     Throw an error if such card already exists.
     """
 
-    global CARDS
+    cards = get_cards()
 
-    if card_id in CARDS:
+    if card_id in cards:
         raise Exception(f"Card {card_id} already exists")
 
-    CARDS.append(card_id)
-    write_data(CARDS_FILE_PATH, CARDS)
+    cards.append(card_id)
+    write_data(CARDS_FILE_PATH, cards)
 
     return card_id
 
@@ -163,22 +149,20 @@ def delete_card(card_id):
     Delete a card
     """
 
-    global CARDS
-
-    CARDS.remove(card_id)
-    write_data(CARDS_FILE_PATH, CARDS)
+    cards = get_cards()
+    cards.remove(card_id)
+    write_data(CARDS_FILE_PATH, cards)
 
 def add_terminal(name):
     """
     Add new terminal
     """
 
-    global TERMINALS
-
     terminal_id = uuid.uuid1().int
     terminal = {'name': name, 'id': terminal_id}
-    TERMINALS.append(terminal)
-    write_data(TERMINALS_FILE_PATH, TERMINALS)
+    terminals = get_terminals()
+    terminals.append(terminal)
+    write_data(TERMINALS_FILE_PATH, terminals)
 
     return terminal
 
@@ -187,22 +171,19 @@ def delete_terminal(terminal_id):
     Delete a terminal by ID
     """
 
-    global TERMINALS
-
-    TERMINALS = list(filter(lambda t: t['id'] != terminal_id, TERMINALS))
-    write_data(TERMINALS_FILE_PATH, TERMINALS)
+    new_terminals = list(filter(lambda t: t['id'] != terminal_id, get_terminals()))
+    write_data(TERMINALS_FILE_PATH, new_terminals)
 
 def add_person(full_name):
     """
     Add new person
     """
 
-    global PEOPLE
-
     person_id = uuid.uuid1().int
     person = {'full_name': full_name, 'id': person_id}
-    PEOPLE.append(person)
-    write_data(PEOPLE_FILE_PATH, PEOPLE)
+    people = get_people()
+    people.append(person)
+    write_data(PEOPLE_FILE_PATH, people)
 
     return person
 
@@ -211,32 +192,28 @@ def delete_person(person_id):
     Delete a person by ID
     """
 
-    global PEOPLE
-
-    PEOPLE = list(filter(lambda t: t['id'] != person_id, PEOPLE))
-    write_data(PEOPLE_FILE_PATH, PEOPLE)
+    new_people = list(filter(lambda t: t['id'] != person_id, get_people()))
+    write_data(PEOPLE_FILE_PATH, new_people)
 
 def assign_card(person_id, card_id):
     """
     Assign a card to a particular person
     """
 
-    global PEOPLE
-
-    person = find_person("id", person_id)
+    people = get_people()
+    person = find_by(people, lambda p: p.get("id") == person_id)
     person['card_id'] = card_id
-    write_data(PEOPLE_FILE_PATH, PEOPLE)
+    write_data(PEOPLE_FILE_PATH, people)
 
 def unassign_card(person_id):
     """
     Unassign the card from a paticular person
     """
 
-    global PEOPLE
-
-    person = find_person("id", person_id)
+    people = get_people()
+    person = find_by(people, lambda p: p.get("id") == person_id)
     del person['card_id']
-    write_data(PEOPLE_FILE_PATH, PEOPLE)
+    write_data(PEOPLE_FILE_PATH, people)
 
 def add_scan(terminal_id, card_id):
     """
@@ -246,21 +223,19 @@ def add_scan(terminal_id, card_id):
     but the record is added anyway (without "person_id")
     """
 
-    global PEOPLE
-    global TERMINALS
-    global SCANS
-    global CARDS
+    cards = get_cards()
+    scans = get_scans()
 
     time = datetime.now()
     person = find_person("card_id", card_id)
     terminal = find_terminal("id", terminal_id)
 
-    if (not card_id in CARDS) or (terminal is None) or (person is None):
-        SCANS.append({'card_id': card_id, 'terminal_id': terminal_id, 'time': time})
-        write_data(SCANS_FILE_PATH, SCANS)
+    if (not card_id in cards) or (terminal is None) or (person is None):
+        scans.append({'card_id': card_id, 'terminal_id': terminal_id, 'time': time})
+        write_data(SCANS_FILE_PATH, scans)
 
         err_msg = ""
-        if not card_id in CARDS:
+        if not card_id in cards:
             err_msg = f"Card {card_id} isn't registered in the system"
         elif terminal is None:
             err_msg = f"Terminal {terminal_id} isn't registered in the system"
@@ -269,11 +244,11 @@ def add_scan(terminal_id, card_id):
 
         raise Exception(err_msg)
 
-    SCANS.append({
+    scans.append({
         'card_id': card_id,
         'terminal_id': terminal_id,
         'person_id': person['id'],
         'time': time
     })
 
-    write_data(SCANS_FILE_PATH, SCANS)
+    write_data(SCANS_FILE_PATH, scans)
