@@ -1,6 +1,8 @@
-MQTT_BROKER_URL = "mqtt.eclipse.org"
-MQTT_BROKER_USER_NAME = ""
-MQTT_BROKER_PASSWORD = ""
+MQTT_BROKER = {
+    'url': "mqtt.eclipse.org",
+    'username': "",
+    'password': ""
+}
 
 TOP_LEVEL_TOPIC = "rfid-scan-tracker"
 TOPICS = {

@@ -2,15 +2,15 @@ import sys
 import json
 import paho.mqtt.client as mqtt
 from server.data_handlers import add_scan
-from settings import MQTT_BROKER_URL, TOP_LEVEL_TOPIC, TOPICS
+from settings import MQTT_BROKER as BROKER, TOP_LEVEL_TOPIC, TOPICS
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connection established") 
         client.subscribe(f"{TOP_LEVEL_TOPIC}/#")
     else:
-        print(f"Couldn't connect to the broker {MQTT_BROKER_URL}. Error code {rc}")
-    
+        print(f"Couldn't connect to the broker {BROKER['url']}. Error code {rc}")
+
 def on_disconnect():
     print("Disconnected from the broker")
 
@@ -36,6 +36,7 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
-print(f"Connecting to the broker {MQTT_BROKER_URL}")
-client.connect(MQTT_BROKER_URL, 1883, 60)
+client.username_pw_set(BROKER['username'], BROKER['password'])
+print(f"Connecting to the broker {BROKER['url']}")
+client.connect(BROKER['url'], 1883, 60)
 client.loop_forever()

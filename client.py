@@ -2,7 +2,7 @@ import json
 import time
 import sys, traceback
 import paho.mqtt.client as mqtt
-from settings import MQTT_BROKER_URL, MQTT_BROKER_USER_NAME, MQTT_BROKER_PASSWORD, TOPICS
+from settings import MQTT_BROKER as BROKER, TOPICS
 
 TERMINAL_ID = None
 try:
@@ -10,12 +10,13 @@ try:
 except Exception:
     print("\nPlease provide a valid Terminal ID by running:\n\npython3 client.py <Terminal ID>\n")
     sys.exit()
-    
+ 
+
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connection established\n") 
     else:
-        print(f"Couldn't connect to the broker {MQTT_BROKER_URL}. Error code {rc}\n")
+        print(f"Couldn't connect to the broker {BROKER['url']}. Error code {rc}\n")
 
 def on_disconnect():
     print("Disconnected from the broker\n")
@@ -39,8 +40,9 @@ def publish(topic, value):
     else:
         print(f"Publish to {topic} failed. Error code {res.rc}")
 
-print(f"Connecting to the broker {MQTT_BROKER_URL}")
-client.connect(MQTT_BROKER_URL, 1883, 60)
+client.username_pw_set(BROKER['username'], BROKER['password'])
+print(f"Connecting to the broker {BROKER['url']}")
+client.connect(BROKER['url'], 1883, 60)
 client.loop_start()
 
 cards = [31312]
