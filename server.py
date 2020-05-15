@@ -42,7 +42,7 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
-client.username_pw_set(BROKER['username'], BROKER['password'])
+client.username_pw_set(BROKER['server']['username'], BROKER['server']['password'])
 client.tls_set("ca.crt")
 
 print(f"Connecting to the broker {BROKER['url']}")

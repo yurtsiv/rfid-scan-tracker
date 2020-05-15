@@ -17,7 +17,6 @@ except Exception:
     print("\nPlease provide a valid Terminal ID by running:\n\npython3 client.py <Terminal ID>\n")
     sys.exit()
  
-
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connection established\n") 
@@ -46,7 +45,7 @@ def publish(topic, value):
     else:
         print(f"Publish to {topic} failed. Error code {res.rc}")
 
-client.username_pw_set(BROKER['username'], BROKER['password'])
+client.username_pw_set(BROKER['client']['username'], BROKER['client']['password'])
 client.tls_set("ca.crt")
 
 print(f"Connecting to the broker {BROKER['url']}")
