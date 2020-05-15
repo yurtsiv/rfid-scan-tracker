@@ -43,6 +43,8 @@ client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 client.username_pw_set(BROKER['username'], BROKER['password'])
+client.tls_set("ca.crt")
+
 print(f"Connecting to the broker {BROKER['url']}")
-client.connect(BROKER['url'], 1883, 60)
+client.connect(BROKER['url'], BROKER['port'], 60)
 client.loop_forever()

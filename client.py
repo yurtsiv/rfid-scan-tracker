@@ -47,8 +47,10 @@ def publish(topic, value):
         print(f"Publish to {topic} failed. Error code {res.rc}")
 
 client.username_pw_set(BROKER['username'], BROKER['password'])
+client.tls_set("ca.crt")
+
 print(f"Connecting to the broker {BROKER['url']}")
-client.connect(BROKER['url'], 1883, 60)
+client.connect(BROKER['url'], BROKER['port'], 60)
 client.loop_start()
 
 cards = [

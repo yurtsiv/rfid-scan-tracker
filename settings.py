@@ -3,7 +3,8 @@ Global settings
 """
 
 MQTT_BROKER = {
-    'url': "mqtt.eclipse.org",
+    'url': "stepy-pc",
+    'port': 8883,
     'username': "",
     'password': ""
 }
