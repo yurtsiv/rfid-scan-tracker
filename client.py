@@ -34,7 +34,9 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 
 client.username_pw_set(BROKER['client']['username'], BROKER['client']['password'])
-client.tls_set("ca.crt")
+
+if BROKER['ust_tls']:
+    client.tls_set("ca.crt")
 
 print(f"Connecting to the broker {BROKER['url']}")
 client.connect(BROKER['url'], BROKER['port'], 60)
