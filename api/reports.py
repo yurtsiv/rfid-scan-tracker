@@ -3,10 +3,15 @@ Report generation functionality
 """
 
 import csv
+import datetime
+
 from api.data_handlers import filter_scans, find_person
 from api.list_utils import group_into_pairs
 
-def write_to_csv(person_name, regs_groups):
+def str_to_date_time(str):
+    return datetime.datetime.strptime(str, '%Y-%m-%d %H:%M:%S.%f')
+
+def write_to_csv(person_name, scans_groups):
     """
     Helper function for saving generated
     report into a CSV file
@@ -20,26 +25,34 @@ def write_to_csv(person_name, regs_groups):
             'Enter Time',
             'Exit Terminal',
             'Exit Card',
-            'Exit Time'
+            'Exit Time',
+            'Period (hours)'
         ])
 
-        for reg_group in regs_groups:
-            enter_reg = reg_group[0]
+        for scan_group in scans_groups:
+            enter_scan = scan_group[0]
             row = [
-                enter_reg['terminal_id'],
-                enter_reg['card_id'],
-                enter_reg['time']
+                enter_scan['terminal_id'],
+                enter_scan['card_id'],
+                enter_scan['time']
             ]
 
-            if len(reg_group) == 2:
-                exit_reg = reg_group[1]
 
-            row = row + [
-                exit_reg['terminal_id'],
-                exit_reg['card_id'],
-                exit_reg['time']
-            ]
-            
+            if len(scan_group) == 2:
+                exit_scan = scan_group[1]
+
+                period_hours = (
+                    str_to_date_time(exit_scan['time']) -
+                    str_to_date_time(enter_scan['time'])
+                ).seconds / 3600
+
+                row = row + [
+                    exit_scan['terminal_id'],
+                    exit_scan['card_id'],
+                    exit_scan['time'],
+                    period_hours
+                ]
+
             writer.writerow(row)
 
 def generate_report(person_id):
@@ -52,7 +65,7 @@ def generate_report(person_id):
         raise Exception(f"No person wtih ID {person_id} registered in the system")
 
     scans = filter_scans(lambda r: r.get('person_id') == person_id)
-    sorted_regs = sorted(scans, key=lambda r: r['time'])
-    regs_groups = group_into_pairs(sorted_regs)
+    sorted_scans = sorted(scans, key=lambda r: r['time'])
+    scans_groups = group_into_pairs(sorted_scans)
 
-    write_to_csv(person['full_name'], regs_groups)
+    write_to_csv(person['full_name'], scans_groups)

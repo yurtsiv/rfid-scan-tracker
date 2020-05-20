@@ -161,7 +161,7 @@ def add_terminal(name):
     Add new terminal
     """
 
-    terminal_id = uuid.uuid1().int
+    terminal_id = str(uuid.uuid4())
     terminal = {'name': name, 'id': terminal_id}
     terminals = get_terminals()
     terminals.append(terminal)
@@ -182,7 +182,7 @@ def add_person(full_name):
     Add new person
     """
 
-    person_id = uuid.uuid1().int
+    person_id = str(uuid.uuid4())
     person = {'full_name': full_name, 'id': person_id}
     people = get_people()
     people.append(person)

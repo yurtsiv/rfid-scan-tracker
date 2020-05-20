@@ -14,7 +14,7 @@ from settings import MQTT_BROKER as BROKER, TOPICS
 TERMINAL_ID = None
 
 try:
-    TERMINAL_ID = int(sys.argv[1])
+    TERMINAL_ID = sys.argv[1]
 except Exception:
     print("\nPlease provide a valid Terminal ID by running:\n\npython3 client.py <Terminal ID>\n")
     sys.exit()
@@ -35,7 +35,7 @@ client.on_disconnect = on_disconnect
 
 client.username_pw_set(BROKER['client']['username'], BROKER['client']['password'])
 
-if BROKER['ust_tls']:
+if BROKER['use_tls']:
     client.tls_set("ca.crt")
 
 print(f"Connecting to the broker {BROKER['url']}")
