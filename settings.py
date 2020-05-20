@@ -15,7 +15,6 @@ MQTT_BROKER = {
     }
 }
 
-TOP_LEVEL_TOPIC = "rfid-scan-tracker"
 TOPICS = {
-    'scan_card': f"{TOP_LEVEL_TOPIC}/scan-card"
+    'scan_card': "rfid-scan-tracker/scan-card"
 }

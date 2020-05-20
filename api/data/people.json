@@ -1,12 +1,12 @@
 [
     {
-        "full_name": "Person 1",
         "id": 136255763142979543271555322421517909482,
-        "card_id": "123123123"
+        "full_name": "Jan Kowalski",
+        "card_id": 123123123
     },
     {
-        "full_name": "Person 2",
+        "full_name": "John Doe",
         "id": 97387517585285325299741811721558195690,
-        "card_id": "123123122"
+        "card_id": 123123122
     }
 ]

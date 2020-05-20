@@ -8,12 +8,12 @@ import sys
 import json
 import paho.mqtt.client as mqtt
 from api.data_handlers import add_scan
-from settings import MQTT_BROKER as BROKER, TOP_LEVEL_TOPIC, TOPICS
+from settings import MQTT_BROKER as BROKER, TOPICS
 
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connection established") 
-        client.subscribe(f"{TOP_LEVEL_TOPIC}/#")
+        client.subscribe(TOPICS['scan_card'])
     else:
         print(f"Couldn't connect to the broker {BROKER['url']}. Error code {rc}")
 
