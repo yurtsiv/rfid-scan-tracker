@@ -52,6 +52,9 @@ def print_and_pick_with_cancel(target_list, label="Select an item: "):
     picked_item = pick_from_list(target_list + [None], label=label)
     return picked_item
 
+def list_people():
+    print_list(dh.get_people())
+
 def add_person_menu():
     """Menu for adding new person"""
 
@@ -97,6 +100,8 @@ def delete_card_menu():
         dh.delete_card(selected_card)
         print("\nCard deleted")
 
+def list_terminals():
+    print_list(dh.get_terminals())
 
 def add_terminal_menu():
     """Menu for adding new terminal"""
@@ -171,10 +176,12 @@ def report_menu():
     print("\nReport generated. Look for CSV file in the current direcotry")
 
 MENU_ITEMS = [
+    ("List people", list_people),
     ("Add person", add_person_menu),
     ("Delete person", delete_person_menu),
     ("Add card", add_card_menu),
     ("Delete card", delete_card_menu),
+    ("List terminals", list_terminals),
     ("Add terminal", add_terminal_menu),
     ("Delete terminal", delete_terminal_menu),
     ("Assign card", assign_card_menu),
