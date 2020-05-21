@@ -41,10 +41,10 @@ def write_to_csv(person_name, scans_groups):
             if len(scan_group) == 2:
                 exit_scan = scan_group[1]
 
-                period_hours = (
+                period_hours = round((
                     str_to_date_time(exit_scan['time']) -
                     str_to_date_time(enter_scan['time'])
-                ).seconds / 3600
+                ).seconds / 3600, 2)
 
                 row = row + [
                     exit_scan['terminal_id'],
